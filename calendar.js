@@ -18,6 +18,8 @@
 //!Mil003
 	Strict Mode - Januarii MMXX
 	Extract language-sensitive data to locale-##.js, where ## stands for the language's BCP code.
+//§Mil004
+	Mois en caractères Unicode
 */
 //!Mil003
 "use strict"; 
@@ -976,8 +978,8 @@ function updateFromGregorian()
     if (hmindex == 12 && !hebrew_leap(hebcal[0])) {
         hmindex = 14;
     }
-    document.hebrew.hebmonth.src = "figures/hebrew_month_" +
-        hmindex + ".gif";
+	//!Mil004 hebrew month as a Unicode string
+	document.hebrew.hebmonth.value =	hebrew_month [hmindex];				// document.hebrew.hebmonth.src = "figures/hebrew_month_" + hmindex + ".gif";
 	//Mil003 : Type of Hebrew year is in a language-sensitive array
     switch (hebrew_year_days(hebcal[0])) {
         case 353:
