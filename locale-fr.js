@@ -48,13 +48,13 @@ var CALENDAR_NAMES = {
 var ALERT_MSG = {
 	Invalid_search_request	: "Champ de recherche invalide : ",
 	In_search_request 	: "\" invalide dans champ de recherche",
-	Invalid_calendar	: "Calendrier \"",
-	Invalid_Greg_date 	: "Date de calendrier grégorien \"",
-	Invalid_Jul_date  	: "Date de calendrier julien \"",
-	Invalid_JD			: "Jour julien \"",
-	Invalid_MJD			: "Jour julien modifié \"",
-	Invalid_Unix		: "Compteur Unix \"",
-	Invalid_ISO			: "Date ISO-8601 \"",
-	Invalid_EXL			: "Compteur Excel (1900/PC) \"",
-	Invalid_EXL04		: "Compteur Excel (1904/Mac) \""
+	Invalid_calendar	: "Calendrier invalide \"",
+	Invalid_Greg_date 	: "Date de calendrier grégorien invalide \"",
+	Invalid_Jul_date  	: "Date de calendrier julien invalide \"",
+	Invalid_JD			: "Jour julien invalide \"",
+	Invalid_MJD			: "Jour julien modifié invalide \"",
+	Invalid_Unix		: "Compteur Unix invalide \"",
+	Invalid_ISO			: "Date ISO-8601 invalide \"",
+	Invalid_EXL			: "Compteur Excel (1900/PC) invalide \"",
+	Invalid_EXL04		: "Compteur Excel (1904/Mac) invalide \""
 };
