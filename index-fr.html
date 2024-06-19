@@ -1,84 +1,10 @@
 <!DOCTYPE html PUBLIC>
 <html>
 <head>
-<title>Convertisseur de calendriers version 2020</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<style type="text/css">
-/* structure flexible */
-section {
-	display: inline-table ;
-	}
-form {
-	margin-bottom: 0;
-	}
-	h1 { text-align : center; }
-	input.yearnum {
-		width: 5em
-	}
-	input.daynum {
-		width: 3em
-	}
-    h3 { 
-		text-align : center;
-		margin-top: 0.3em;
-		margin-bottom: 0;
-		clear: both
-	}
-    dt {
-    	margin-top: 1ex;
-    }
-    
-    .ctr {
-        text-align: center
-    }
-    
-    p {
-    	text-align: justify;
-    }
-    
-    p.c {
-    	text-align: center;
-    }
-    
-    span.bcad {
-    	font-variant: small-caps;
-	text-transform: lowercase;
-    }
-    
-    table.a {
-   	float: right;
-    	margin-left: 12px;
-	width: 170px;
-    }
-    
-    table.l {
-    	border: 1px outset black;
-		/* float: left; */
-		/* margin-right: 8px; */
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	background-color: #D0D0D0;
-	color: #000000;
-	/* width: 45%; */
-    }
-    table.l td, th {
-    	border: 1px inset;
-	padding: 5px;
-    }
-    
-    table.r {
-    	border: 1px outset black;
-    	float: right; 
-    	margin-left: 8px;
-	background-color: #D0D0D0;
-	color: #000000;
-    }
-    
-    table.r td, th {
-    	border: 1px inset;
-    }
-</style>
+<title>Convertisseur de calendriers</title>
+<!--Mil005 style in a separate sheet -->
+<link href="fourmilab.css" rel="stylesheet"/>
 
 <meta name="keywords" content="calendrier, convertisseur, calendrier julien, calendrier grégorien, 
 								calendrier musulman, calendrier hébraïque, calendrier persan, 
@@ -104,8 +30,8 @@ form {
 
 <body class="main ctr">
 
-<h1>Convertisseur de calendriers de Fourmilab <br/>
-version française corrigée de 2020	</h1>
+<h1>Convertisseur de calendriers de Fourmilab<br/>
+version française corrigée de 2024</h1>
 
 <p class="c">Vérification que votre navigateur utilise JavaScript&hellip;</p>
 
@@ -156,15 +82,25 @@ function dump(s, v)
 </script>
 -->
 <section>
-                     <h3>Calendrier grégorien</h3>
+                     <h3>Calendrier grégorien proleptique</h3>
 
 <form name="gregorian" action="javascript:return false;">
 <table class="l">
 
 <tr>
-<th>Année, date:</th>
-<td align="center">
-	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
+<th>
+    Heure:
+</th>
+<td align="center" colspan="5">
+	<input type="number" min="0" max="23" class="daynum ctr" name="hour" value="00" />:
+	<input type="number" min="0" max="59" class="daynum ctr" name="min" value="00" />:
+	<input type="number" min="0" max="59" class="daynum ctr" name="sec" value="00" />
+</td>
+</tr>
+
+<tr>
+<th>Date:</th>
+<td align="center" colspan="2">
 	<input type="number" min="-271821" max="275760" class="yearnum ctr" name="year" value="1998" />
 	<select name="month" size="1" class="ctr">
         <option value="1">janvier</option>
@@ -184,20 +120,14 @@ function dump(s, v)
 	<input type="text" name="wday" value="" size="9" class="ctr" readonly="readonly" />
 </td>
 </tr>
-
 <tr>
-<th>
-    Heure:
-</th>
-<td align="center" colspan="5">
-	<input type="number" min="0" max="23" class="daynum ctr" name="hour" value="00" />:
-	<input type="number" min="0" max="59" class="daynum ctr" name="min" value="00" />:
-	<input type="number" min="0" max="59" class="daynum ctr" name="sec" value="00" />
+<th>Année:</th>
+
+<td align="center">
+	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
 </td>
-</tr>
 
-<tr>
-<td colspan="6" align="center">
+<td align="center">
 <input type="button" value="Calcul" onclick="calcGregorian();" />
 &nbsp; &nbsp;
 <input type="button" value="Aujourd'hui" onclick="setDateToToday(); calcGregorian();" />
@@ -263,9 +193,8 @@ function dump(s, v)
 <table class="l">
 
 <tr>
-<th>Année, date:</th>
-<td align="center">
-	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
+<th>Date:</th>
+<td align="center" colspan="2">
 	<input type="number" min="-271821" max="275760" class="yearnum ctr" name="year" value="1998" />
 	<select name="month" size="1" class="ctr">
         <option value="1">janvier</option>
@@ -287,8 +216,12 @@ function dump(s, v)
 </tr>
 
 <tr>
-<td colspan="6" align="center">
-<input type="button" value="Calcul" onclick="calcJulianCalendar();" />
+<th>Année: </th>
+<td align="center">
+	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
+</td>
+<td>
+	<input type="button" value="Calcul" onclick="calcJulianCalendar();" />
 </td>
 </tr>
 </table>
@@ -303,9 +236,8 @@ function dump(s, v)
 <table class="l">
 
 <tr>
-<th>Année, date:</th>
-<td align="center">
-	<input type="text" name="leap" value="" size="36" class="ctr" readonly="readonly" />
+<th>Date:</th>
+<td align="center" colspan="2">
 	<input type="number" min="-268061" max="279517" class="yearnum ctr" name="year" value="1998" />
 	<select name="month" size="1" class="ctr">
         <option value="1">Nisan</option>
@@ -326,16 +258,20 @@ function dump(s, v)
 </td>
 </tr>
 <tr>
-	<th>Mois hébraïque:</th>
+	<th>Mois:</th>
 	<td align="center">
 	<!-- Mil004 -->
 		<input name="hebmonth" type="text" class="ctr" disabled>
 		<!-- <img src="figures/hebrew_month_0.gif" name="hebmonth" width="186" height="51" alt="" /> -->
 	</td>
+	<td align="center">
+		<input type="button" value="Calcul" onclick="calcHebrew();" />
+	</td>
 </tr>
 <tr>
-	<td colspan="2" align="center">
-		<input type="button" value="Calcul" onclick="calcHebrew();" />
+	<th>Année:</th>
+	<td align="center" colspan="2">
+		<input type="text" name="leap" value="" size="36" class="ctr" readonly="readonly" />
 	</td>
 </tr>
 </table>
@@ -350,9 +286,8 @@ function dump(s, v)
 <table class="l">
 
 <tr>
-<th>Année, date:</th>
-<td align="center">
-	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
+<th>Date:</th>
+<td align="center" colspan="2">
 	<input type="number" min="-268061?" max="283583" class="yearnum ctr" name="year" value="0" />
 	<select name="month" size="1" class="ctr">
         <option value="1">Muharram</option>
@@ -374,7 +309,9 @@ function dump(s, v)
 </tr>
 
 <tr>
-	<td colspan="6" align="center"><input type="button" value="Calcul" onclick="calcIslamic();" /></td>
+	<th>Année:</th>
+	<td align="center" ><input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" /></td>
+	<td align="center" ><input type="button" value="Calcul" onclick="calcIslamic();" /></td>
 </tr>
 </table>
 </form>
@@ -382,15 +319,14 @@ function dump(s, v)
 
 </section>
 <section>
-            <h3><a name="persiana">Calendrier persan standard</a></h3>
+            <h3><a name="persiana">Calendrier persan astronomique</a></h3>
 
 <form name="persiana" action="javascript:return false;">
 <table class="l">
 
 <tr>
-<th>Année, date:</th>
-<td align="center">
-	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
+<th>Date:</th>
+<td align="center" colspan="2">
 	<input type="number" min="-271821" max="275760" class="yearnum ctr" name="year" value="1998" />
 	<select name="month" size="1" class="ctr">
         <option value="1">Farvardin</option>
@@ -412,12 +348,14 @@ function dump(s, v)
 </tr>
 
 <tr>
-<td colspan="6" align="center">
-<input type="button" value="Calcul" onclick="calcPersiana();" />
-<!--
-<input type="button" value="+" onclick="document.persiana.year.value++; calcPersiana();" />
--->
-</td>
+	<th>Année:</th>
+	<td align="center"><input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" /></td>
+	<td align="center">
+		<input type="button" value="Calcul" onclick="calcPersiana();" />
+	<!--
+	<input type="button" value="+" onclick="document.persiana.year.value++; calcPersiana();" />
+	-->
+	</td>
 
 </tr>
 </table>
@@ -425,15 +363,14 @@ function dump(s, v)
 
 </section>
 <section>
-            <h3><a name="persian">Calendrier persan algorithmique</a></h3>
+            <h3><a name="persian">Calendrier persan algorithmique (cycle 2820 ans)</a></h3>
 
 <form name="persian" action="javascript:return false;">
 <table class="l">
 
 <tr>
-<th>Année, date:</th>
-<td align="center">
-	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
+<th>Date:</th>
+<td align="center" colspan="2">
 	<input type="number" min="-271821" max="275760" class="yearnum ctr" name="year" value="1998" />
 	<select name="month" size="1" class="ctr">
         <option value="1">Farvardin</option>
@@ -454,9 +391,11 @@ function dump(s, v)
 </td>
 </tr>
 <tr>
-<td colspan="6" align="center">
-<input type="button" value="Calcul" onclick="calcPersian();" />
-</td>
+	<th>Année:</th>
+	<td align="center"><input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" /></td>
+	<td align="center">
+	<input type="button" value="Calcul" onclick="calcPersian();" />
+	</td>
 </tr>
 </table>
 </form>
@@ -469,29 +408,26 @@ function dump(s, v)
 <table class="l">
 
 <tr>
-	<th>Maya compte long:&nbsp;&nbsp;</th>
-	<td colspan="3" align="center">
+	<th>Date:</th>
+	<td colspan="4" align="center">
     <input type="number" class="yearnum ctr" name="baktun" value="" size="4" />
     <b>.</b>
-    <input type="number" class="daynum ctr" min="0" max="19" name="katun" value="" size="3" />
+    <input type="number" class="daynum ctr" min="0" max="19" name="katun" value="" />
     <b>.</b>
-    <input type="number" class="daynum ctr" min="0" max="19" name="tun" value="" size="3" />
+    <input type="number" class="daynum ctr" min="0" max="19" name="tun" value="" />
     <b>.</b>
-    <input type="number" class="daynum ctr" min="0" max="17" name="uinal" value="" size="3" />
+    <input type="number" class="daynum ctr" min="0" max="17" name="uinal" value="" />
     <b>.</b>
-    <input type="number" class="daynum ctr" min="0" max="19" name="kin" value="" size="3" />
+    <input type="number" class="daynum ctr" min="0" max="19" name="kin" value="" />
 	</td>
 </tr>
-</table>
-<table class="l">
+
 <tr>
-	<th>Haab:&nbsp;&nbsp;</th><td><input type="text" name="haab" value="" size="9" class="ctr" readonly="readonly" />&nbsp;&nbsp;</td>
-	<th>Tzolkin:&nbsp;&nbsp;</th><td><input type="text" name="tzolkin" value="" size="10" class="ctr" readonly="readonly" /></td>
-</tr>
-<tr>
-<td colspan="4" align="center">
-<input type="button" value="Calcul" onclick="calcMayanCount();" />
-</td>
+	<th>Haab:</th><td><input type="text" name="haab" value="" size="9" class="ctr" readonly="readonly" /></td>
+	<th>Tzolkin:</th><td><input type="text" name="tzolkin" value="" size="9" class="ctr" readonly="readonly" /></td>
+	<td align="center">
+	<input type="button" value="Calcul" onclick="calcMayanCount();" />
+	</td>
 </tr>
 </table>
 </form>
@@ -717,9 +653,8 @@ are identical to names in the 19 name cycles for days and months.
 <table class="l">
 
 <tr>
-<th>Année, date:</th>
-<td align="center">
-	<input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" />
+<th>Date:</th>
+<td align="center"colspan="2" >
 	<input type="number" min="-271821" max="275760" class="yearnum ctr" name="year" value="1998" />
 	<select name="month" size="1" class="ctr">
         <option value="1">Caitra</option>
@@ -741,9 +676,11 @@ are identical to names in the 19 name cycles for days and months.
 </tr>
 
 <tr>
-<td colspan="6" align="center">
-<input type="button" value="Calcul" onclick="calcIndianCivilCalendar();" />
-</td>
+	<th>Année:</th>
+	<td align="center"><input type="text" name="leap" value="" size="15" class="ctr" readonly="readonly" /></td>
+	<td align="center">
+	<input type="button" value="Calcul" onclick="calcIndianCivilCalendar();" />
+	</td>
 </tr>
 </table>
 </form>
@@ -879,7 +816,7 @@ are identical to names in the 19 name cycles for days and months.
 
 <tr>
 <td align="center">
-    <b>Valeur de l'horodateur Unix:</b>
+    <b>Secondes depuis 1/1/1970:</b>
 
     <input type="number" step="any" class="ctr" name="time" value="" />
 </td>
@@ -894,14 +831,14 @@ are identical to names in the 19 name cycles for days and months.
 </section>
 <section>
 
-                         <h3><a name="excelserial1900">Compteurs de jours Excel 1900 (Windows)</a></h3>
+                         <h3><a name="excelserial1900">Compteur de jour 1900</a></h3>
 
 <form name="excelserial1900" action="javascript:return false;">
 <table class="l">
 
 <tr>
 <td align="center">
-    <b>Compteur Excel:</b>
+    <b>Jours depuis 1899-12-30:</b>
 
     <input type="number" step="any" class="ctr" name="day" value="" />
 </td>
@@ -916,7 +853,7 @@ are identical to names in the 19 name cycles for days and months.
 </section>
 <section>
 
-                         <h3><a name="excelserial1904">Compteurs de jours Excel 1904 (Mac OS)</a></h3>
+                         <h3><a name="excelserial1904">Compteur de jours 1904</a></h3>
 
 
 <form name="excelserial1904" action="javascript:return false;">
@@ -924,7 +861,7 @@ are identical to names in the 19 name cycles for days and months.
 
 <tr>
 <td align="center">
-    <b>Compteur Excel:</b>
+    <b>Jours depuis 1904-01-01:</b>
 
     <input type="number" step="any" class="ctr" name="day" value="" />
 </td>
