@@ -6,12 +6,16 @@ Ceci est l'application de conversion de calendriers Fourmilab de John Walker (or
  * Trois erreurs générales de calcul ont été corrigées, voir début de calendar.js.
  * Les éléments linguistiques ont été réparties dans des fichiers ad hoc, _locale-en.js_ et _locale-fr.js_ respectivement.
  * L'affichage des mois en hébreu est désormais assuré via les caractères Unicode, et non par des fichiers image.
+ * Les années avant l'origine des deux calendriers persans sont calculés de la même manière, en notation algébrique.
+ * Les styles sont groupés dans une feuille CSS séparée.
 
 This is Fourmilab calendar, the calendar conversion application by John Walker (original in 2051). Here are the changes:
  * The explanation texts on calendars have been suppressed, to facilitate control and comparison.
  * Three general computing bugs have been fixed, see in calendar.js.
  * Language-specific element have been stored in separate files: _locale-en.js_ and _locale-fr.js_ respectively.
  * Hebrew months are displayed using Unicode characters rather than image files.
+ * Years before epoch of both persian calendars are computed the same way, in algebraic notation.
+ * Styles are on a separate CSS file.
  
 ## Utlisation en ligne / On-line usage
 
