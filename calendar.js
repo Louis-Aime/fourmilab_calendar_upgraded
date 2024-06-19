@@ -5,21 +5,21 @@
               http://www.fourmilab.ch/documents/calendar/
                 This program is in the public domain.
 */
-/* Changes by Louis A de Fouquières - Miletus SARL
-//!Mil001
-	Bugs fix Januarii MMXVII
-		Value of "Time" higher than 12 h would yield date shifted by one on most calendar
-		Management of Excel (Windows) counter would be wrong, in the sense that standard Excel display should be considered wrong
-		Gregorian fields would not be updated after a change on another calendar
-//!Mil002
-	French version - Decembris MMIXX
-		Coding UTF-8 for all files
-		Displayed elements in French
-//!Mil003
-	Strict Mode - Januarii MMXX
+/* Changes by Louis A de Fouquières - Miletus
+//!Mil001 - Januarii MMXVII - Bugs fix 
+	Value of "Time" higher than 12 h would yield date shifted by one on most calendar
+	Management of Excel (Windows) counter would be wrong, in the sense that standard Excel display should be considered wrong
+	Gregorian fields would not be updated after a change on another calendar
+//!Mil002 - Decembris MMIXX - UTF-8
+	Coding UTF-8 for all files
+	Displayed elements in French
+//!Mil003 - Januarii MMXX - Extract language-sensitive data
+	Strict Mode 
 	Extract language-sensitive data to locale-##.js, where ## stands for the language's BCP code.
-//§Mil004
-	Mois en caractères Unicode
+//!Mil004 - Decembris MMXX
+	Use Unicode's character set for displaying Hebrew months
+//!Mil005 - Juni MMXXIV - Negative years for persian calendars
+	Use same algebraic notation for years before epoch on both persian calendars
 */
 //!Mil003
 "use strict"; 
@@ -28,7 +28,7 @@
     of an array variable from source code occurs as the code is
     interpreted.  Making these variables pseudo-globals permits us
     to avoid overhead constructing and disposing of them in each
-    call on the function in which whey are used.  */
+    call on the function in which they are used.  */
 
 //!Mil001 var J0000 = 1721424.5;                // Julian date of Gregorian epoch: 0000-01-01	//! this JD value is for 0000-12-31T00
 var J0000 = 1721059.5;				//!Mil001 Julian date of Gregorian epoch: 0000-01-01T00 
@@ -711,7 +711,7 @@ function leap_persiana(year)
 
 function leap_persian(year)
 {
-    return ((((((year - ((year > 0) ? 474 : 473)) % 2820) + 474) + 38) * 682) % 2816) < 682;
+    return ((((((year - 474) % 2820) + 474) + 38) * 682) % 2816) < 682;	//!Mil005 supprime ((year > 0) ? 474 : 473)
 }
 
 //  PERSIAN_TO_JD  --  Determine Julian day from Persian date
@@ -720,7 +720,7 @@ function persian_to_jd(year, month, day)
 {
     var epbase, epyear;
 
-    epbase = year - ((year >= 0) ? 474 : 473);
+    epbase = year -  474 ;	//!Mil005 supprime ((year >= 0) ? 474 : 473)
     epyear = 474 + mod(epbase, 2820);
 
     return day +
@@ -756,9 +756,7 @@ function jd_to_persian(jd)
                     aux1 + 1;
     }
     year = ycycle + (2820 * cycle) + 474;
-    if (year <= 0) {
-        year--;
-    }
+    //!Mil005 if (year <= 0) { year--; }
     yday = (jd - persian_to_jd(year, 1, 1)) + 1;
     month = (yday <= 186) ? Math.ceil(yday / 31) : Math.ceil((yday - 6) / 30);
     day = (jd - persian_to_jd(year, month, 1)) + 1;
@@ -1344,8 +1342,8 @@ function setDateToToday()
     var today = new Date();
 
     /*  The following idiocy is due to bizarre incompatibilities
-        in the behaviour of getYear() between Netscrape and
-        Exploder.  The ideal solution is to use getFullYear(),
+        in the behaviour of getYear() between Netscape and
+        Explorer.  The ideal solution is to use getFullYear(),
         which returns the actual year number, but that would
         break this code on versions of JavaScript prior to
         1.2.  So, for the moment we use the following code
@@ -1358,13 +1356,10 @@ function setDateToToday()
 
         Thanks to Larry Gilbert for pointing out this problem.
     */
+	//!Mil005 idiocy solved, establish code as initially foreseen
+    //! var y = today.getYear(); y = (y < 1000) ? y+1900 : y;
 
-    var y = today.getYear();
-    if (y < 1000) {
-        y += 1900;
-    }
-
-    document.gregorian.year.value = y;
+    document.gregorian.year.value = today.getFullYear();
     document.gregorian.month.selectedIndex = today.getMonth();
     document.gregorian.day.value = today.getDate();
     document.gregorian.hour.value =
