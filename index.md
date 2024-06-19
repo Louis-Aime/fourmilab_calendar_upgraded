@@ -1,6 +1,6 @@
 # Convertisseur Fourmilab / Fourmilab calendar converter
 
-Le convertisseur de calendrier de John Walker's (2015) avec les corrections de Miletus (2020).
+Le convertisseur de calendrier de John Walker's (2015) avec les corrections de Miletus (2020-2024).
 
 [Version française](index-fr.html)
 
